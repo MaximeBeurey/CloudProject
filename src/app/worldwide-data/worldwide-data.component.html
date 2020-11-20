@@ -1,8 +1,11 @@
-<div class="my-5">
+<!-- Title -->
+<div class="my-5 title">
     <h1><span class="virus-icon"></span>COVID-19</h1>
     <h3 class="subtitle">Live updates and statistics</h3>
 </div>
-<div class="row mx-3">
+
+<!-- Summary table -->
+<div class="row mx-3 summary-table">
     <table class="table table-bordered col-md-12">
         <thead>
             <th colspan="2">Coronavirus summary worldwide</th>
@@ -46,4 +49,19 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<!-- Pie chart -->
+<div class="m-3 pie-chart">
+    <div class="header">
+        <p>Corona virus cases distribution worldwide</p>
+    </div>
+    <canvas baseChart
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+    </canvas>
 </div>
