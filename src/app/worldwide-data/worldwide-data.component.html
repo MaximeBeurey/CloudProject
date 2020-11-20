@@ -13,39 +13,39 @@
         <tbody>
             <tr class="cases">
                 <td>Total cases</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getTotalCases() | number}}</td>
             </tr>
             <tr class="cases">
                 <td>New cases</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getNewCases() | number}}</td>
             </tr>
             <tr class="cases">
                 <td>Active cases</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getActiveCases() | number}}</td>
             </tr>
             <tr class="recovered">
                 <td>Total recovered</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getTotalRecovered() | number}}</td>
             </tr>
             <tr class="recovered">
                 <td>New recovered</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getNewRecovered() | number}}</td>
             </tr>
             <tr class="recovered">
                 <td>Recovery rate</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getRecoveryRate()}}<span>&#37;</span></td>
             </tr>
             <tr class="deaths">
                 <td>Total deaths</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getTotalDeaths() | number}}</td>
             </tr>
             <tr class="deaths">
                 <td>New death</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getNewDeaths() | number}}</td>
             </tr>
             <tr class="deaths">
                 <td>Mortality rate</td>
-                <td>Value to find</td>
+                <td>{{this.summaryData.getMortalityRate()}}<span>&#37;</span></td>
             </tr>
         </tbody>
     </table>

@@ -55,9 +55,9 @@ td {
 
 div.pie-chart div.header {
     max-width: 1200px;
-    height: 50px;
-    background-color: #eeeeee;
+    min-height: 4em;
     border: 4px solid white;
+    background-color: #eeeeee;
     margin-left: auto;
     margin-right: auto;
     position: relative;
