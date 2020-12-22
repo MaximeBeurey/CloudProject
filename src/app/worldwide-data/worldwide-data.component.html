@@ -50,6 +50,9 @@
         </tbody>
     </table>
 </div>
+<div class="date">
+    <p>Last update: {{this.summaryData.getDate() | date}}</p>
+</div>
 
 <!-- Pie chart -->
 <div class="m-3 pie-chart">
@@ -64,4 +67,7 @@
     [plugins]="pieChartPlugins"
     [legend]="pieChartLegend">
     </canvas>
+</div>
+<div class="date">
+    <p>Last update: {{this.summaryData.getDate() | date}}</p>
 </div>

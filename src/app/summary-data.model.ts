@@ -49,4 +49,8 @@ export class SummaryData {
         return Math.floor((this.getTotalDeaths() / this.getTotalCases())*10000)/100;
     }
 
+    public getDate(): Date {
+        return this.data["Date"];
+    }
+
 }
