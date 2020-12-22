@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SummaryData } from './summary-data.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,26 +10,43 @@ export class DataService {
   private summaryData: SummaryData;
   private summaryDataURL: string = 'https://api.covid19api.com/summary';
 
-  constructor() { 
+  constructor(private firestore: AngularFirestore) { 
   }
 
-  private async updateData() {
-    // TO-DO check if the data is up to date in firestore
-    var isUpToDate: Boolean = false;
-    if (isUpToDate) {
-      console.log("up to date");
-      // TO-DO retrieve the JSON file from firestore and create an instance of SummaryData
+  private toDate(date: string): Date {
+    return new Date(date);
+  }
+
+  private async getSummaryDataLastUpdate(): Promise<Date> {
+    let docRef = this.firestore.collection("CovidData").doc("SummaryData").ref
+    return docRef.get().then((doc) => {return this.toDate(doc.data()["Date"]);})
+  }
+
+  private async isSummaryDataUpToDate(): Promise<boolean> {
+     let currentDate = new Date().setHours(0,0,0,0).valueOf();
+     console.log(this.getSummaryDataLastUpdate())
+     return this.getSummaryDataLastUpdate().then((date) => {return date.setHours(0,0,0,0).valueOf() === currentDate}) 
+  }
+
+  private async updateSummaryData() {
+    // We check if the data in firestore is up to date
+    if (await this.isSummaryDataUpToDate()) {
+      // retrive data from firestore
+      let content = await this.firestore.collection("CovidData").doc("SummaryData").ref
+      .get().then((doc) => {return JSON.parse(JSON.stringify(doc.data()));});
+      this.summaryData = new SummaryData(content);
     } else {
       // Retrieve data from the API
-      var data: JSON = await fetch(this.summaryDataURL, {method: "GET", redirect: "follow"})
+      let data: JSON = await fetch(this.summaryDataURL, {method: "GET", redirect: "follow"})
       .then(response => response.json()).catch(error => console.log(error));
       this.summaryData = new SummaryData(data);
-      // TO-DO update firestore database
+      // update firestore database
+      this.firestore.collection("CovidData").doc("SummaryData").set(data, {merge: true});
     }
   }
 
   public async getSummaryData() {
-    await this.updateData();
+    await this.updateSummaryData();
     return this.summaryData;
   }
 
