@@ -8,7 +8,7 @@
 <div class="row mx-3 summary-table">
     <table class="table table-bordered col-md-12">
         <thead>
-            <th colspan="2">Coronavirus summary worldwide</th>
+            <th colspan="2">Corona virus summary worldwide</th>
         </thead>
         <tbody>
             <tr class="cases">
@@ -71,3 +71,15 @@
 <div class="date">
     <p>Last update: {{this.summaryData.getDate() | date}}</p>
 </div>
+
+<!-- summary by country -->
+<app-summary-by-country></app-summary-by-country>
+
+<footer class="page-footer">
+    <p>
+        Data source: 
+        <a href="https://covid19api.com/" target="_blank" rel="noopener noreferrer">
+            COVID-19 API / Johns Hopkins CSSE
+        </a>
+    </p>
+</footer>

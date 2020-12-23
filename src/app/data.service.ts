@@ -24,7 +24,6 @@ export class DataService {
 
   private async isSummaryDataUpToDate(): Promise<boolean> {
      let currentDate = new Date().setHours(0,0,0,0).valueOf();
-     console.log(this.getSummaryDataLastUpdate())
      return this.getSummaryDataLastUpdate().then((date) => {return date.setHours(0,0,0,0).valueOf() === currentDate}) 
   }
 

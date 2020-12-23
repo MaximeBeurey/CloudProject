@@ -1,0 +1,49 @@
+<!-- Summary table -->
+<div class="row mx-3 summary-table">
+    <div class="header">
+        <p>Corona virus cases by country</p>
+    </div>    
+    <div class="table-wrapper">
+    <table class="table table-bordered col-md-12">
+            <thead>
+                <th>Country <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+                <th>New cases <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+                <th>Total cases <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+                <th>New recoveries <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+                <th>Total recoveries <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+                <th>New Deaths <br> 
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon> 
+                </th>
+                <th>Total Deaths <br>
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of this.countryData">
+                    <td>{{country[0]}}</td>
+                    <td *ngFor="let i of [1,2,3,4,5,6]">{{country[i] | number}}</td>
+                </tr>  
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="date">
+    <p>Last update: {{this.summaryData.getDate() | date}}</p> <!-- TO DO with the date -->
+</div>

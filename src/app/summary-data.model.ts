@@ -1,3 +1,4 @@
+export type Line = [string, number, ...number[]] & {length: 7};
 export class SummaryData {
 
     private data: JSON;
@@ -52,5 +53,57 @@ export class SummaryData {
     public getDate(): Date {
         return this.data["Date"];
     }
+
+    private getNumberOfCountries(): number{
+        return this.data["Countries"].length;
+    }
+
+    private getCountryName(i: number): string {
+        return this.data["Countries"][i].Country;
+    }
+
+    private getCountryNewCases(i: number): number {
+        return this.data["Countries"][i].NewConfirmed;
+    }
+
+    private getCountryTotalCases(i: number): number {
+        return this.data["Countries"][i].TotalConfirmed;
+    }
+
+    private getCountryNewRecoveries(i: number): number {
+        return this.data["Countries"][i].NewRecovered;
+    }
+
+    private getCountryTotalRecoveries(i: number): number {
+        return this.data["Countries"][i].TotalRecovered;
+    }
+
+    private getCountryNewDeaths(i: number): number {
+        return this.data["Countries"][i].NewDeaths;
+    }
+
+    private getCountryTotalDeaths(i: number): number {
+        return this.data["Countries"][i].TotalDeaths;
+    }
+
+    public getCountryData(): Line[]{
+        let n = this.getNumberOfCountries()
+        let ret: Line[] = [];
+        for (let i = 0; i < n; i++){
+            let line: Line = [
+                this.getCountryName(i),
+                this.getCountryNewCases(i),
+                this.getCountryTotalCases(i),
+                this.getCountryNewRecoveries(i),
+                this.getCountryTotalRecoveries(i),
+                this.getCountryNewDeaths(i),
+                this.getCountryTotalDeaths(i)
+            ];
+            console.log(line);
+            ret.push(line);
+        }
+        console.log(ret);
+        return ret;
+    } 
 
 }

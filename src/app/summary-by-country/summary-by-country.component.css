@@ -1,0 +1,142 @@
+div.header {
+    max-width: 1200px;
+    width: 100%;
+    min-height: 4em;
+    height: auto;
+    overflow-y: auto;
+    border: 4px solid white;
+    background-color: #eeeeee;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    position: relative;
+    text-transform: capitalize;
+}
+
+div.header p {
+    position: relative;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+table {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+thead {
+    border-bottom: 4px solid white;
+}
+
+.table-wrapper {
+    overflow-y: scroll;
+    height: 500px;
+    max-width: 1190px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+}
+
+.table-wrapper th {
+    position: sticky;
+    top: 0;
+    border: 2px solid white;
+    text-align: center;
+    text-transform: capitalize;
+    overflow: scroll;
+}
+
+th:nth-child(1) {
+    background-color: #6c767d ;
+    color: white;
+}
+
+th:nth-child(2), th:nth-child(3) {
+    background-color: #fde29d ;
+}
+
+th:nth-child(4), th:nth-child(5) {
+    background-color: #87c7f3 ;
+}
+
+th:nth-child(6), th:nth-child(7) {
+    background-color: #ed97ab ;
+}
+
+th fa-icon {
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+th fa-icon:hover {
+    border-radius: 100%;
+}
+
+th:nth-child(1) fa-icon:hover {
+    background-color: white;
+    color: #6c767d;
+}
+
+th:not(:nth-child(1)) fa-icon:hover {
+    background-color: black;
+}
+
+th:nth-child(n+2) fa-icon:hover {
+    color: #fde29d;
+}
+
+th:nth-child(n+4) fa-icon:hover {
+    color: #87c7f3;
+}
+
+th:nth-child(n+6) fa-icon:hover {
+    color: #ed97ab;
+}
+
+tbody {
+	height: 500px;
+    overflow: auto;
+    width: 700%;
+}
+
+td {
+    border: 2px solid white;
+    text-align: right;
+    text-transform: capitalize;
+}
+
+td:nth-child(1) {
+    text-align: left;
+    background-color: #6c767d ;
+    color: white;
+}
+
+td:nth-child(2), td:nth-child(3) {
+    background-color: #fde29d ;
+}
+
+td:nth-child(4), td:nth-child(5) {
+    background-color: #87c7f3 ;
+}
+
+td:nth-child(6), td:nth-child(7) {
+    background-color: #ed97ab ;
+}
+
+div.date {
+    padding-left: 8px;
+    text-align: left;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-style: italic;
+    font-weight: 100;
+    color: #444444;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
