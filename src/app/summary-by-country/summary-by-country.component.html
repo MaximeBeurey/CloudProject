@@ -4,35 +4,35 @@
         <p>Corona virus cases by country</p>
     </div>    
     <div class="table-wrapper">
-    <table class="table table-bordered col-md-12">
+        <table class="table table-bordered col-md-12">
             <thead>
                 <th>Country <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(0,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(0,false)"></fa-icon>
                 </th>
                 <th>New cases <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(1,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(1,false)"></fa-icon>
                 </th>
                 <th>Total cases <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(2,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(2,false)"></fa-icon>
                 </th>
                 <th>New recoveries <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(3,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(3,false)"></fa-icon>
                 </th>
                 <th>Total recoveries <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(4,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(4,false)"></fa-icon>
                 </th>
                 <th>New Deaths <br> 
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon> 
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(5,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(5,false)"></fa-icon>
                 </th>
                 <th>Total Deaths <br>
-                    <fa-icon [icon]="faAngleUp"></fa-icon>
-                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                    <fa-icon [icon]="faAngleUp" (click)="this.sortCountryData(6,true)"></fa-icon>
+                    <fa-icon [icon]="faAngleDown" (click)="this.sortCountryData(6,false)"></fa-icon>
                 </th>
             </thead>
             <tbody>
@@ -45,5 +45,5 @@
     </div>
 </div>
 <div class="date">
-    <p>Last update: {{this.summaryData.getDate() | date}}</p> <!-- TO DO with the date -->
+    <p>Last update: {{this.summaryData.getDate() | date}}</p>
 </div>

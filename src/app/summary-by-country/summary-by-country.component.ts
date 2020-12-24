@@ -28,4 +28,17 @@ export class SummaryByCountryComponent implements OnInit {
     })
   }
 
+  public sortCountryData(field: number, ascending: boolean): void {
+    let order = ascending ? -1 : 1
+    this.countryData = this.countryData.sort((a:Line, b:Line) => {
+      if (a[field] < b[field]) {
+        return order * 1;
+      } else if (a[0] > b[0]) {
+        return order * -1;
+      } else {
+        return 0;
+      }
+    });
+  }  
+
 }

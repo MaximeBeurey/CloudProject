@@ -99,10 +99,8 @@ export class SummaryData {
                 this.getCountryNewDeaths(i),
                 this.getCountryTotalDeaths(i)
             ];
-            console.log(line);
             ret.push(line);
         }
-        console.log(ret);
         return ret;
     } 
 
