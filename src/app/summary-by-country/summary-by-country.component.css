@@ -104,6 +104,10 @@ tbody {
     width: 700%;
 }
 
+tr {
+    cursor: pointer;
+}
+
 td {
     border: 2px solid white;
     text-align: right;

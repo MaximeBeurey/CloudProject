@@ -14,12 +14,14 @@ import { environment } from 'src/environments/environment';
 import { WorldwideDataComponent } from './worldwide-data/worldwide-data.component';
 import { SummaryByCountryComponent } from './summary-by-country/summary-by-country.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CountryDataComponent } from './country-data/country-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorldwideDataComponent,
     SummaryByCountryComponent,
+    CountryDataComponent
   ],
   imports: [
     BrowserModule,

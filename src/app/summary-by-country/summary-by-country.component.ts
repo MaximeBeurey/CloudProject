@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import { SummaryData, Line } from '../summary-data.model';
 import { DataService } from '../data.service';
+import { CountryService } from '../country.service';
 
 @Component({
   selector: 'app-summary-by-country',
@@ -18,7 +19,7 @@ export class SummaryByCountryComponent implements OnInit {
   public summaryData: SummaryData;
   public countryData: Line[];
   
-  constructor(private dataProvider: DataService) { }
+  constructor(private dataProvider: DataService, private countryService: CountryService) { }
 
   ngOnInit(): void {
     this.dataProvider.getSummaryData()
@@ -40,5 +41,10 @@ export class SummaryByCountryComponent implements OnInit {
       }
     });
   }  
+
+  public goToCountry(country: Line): void {
+    this.countryService.navigate(country);
+    console.log("We are going to "+country[0]);
+  }
 
 }

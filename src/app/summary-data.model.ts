@@ -1,4 +1,4 @@
-export type Line = [string, number, ...number[]] & {length: 7};
+export type Line = [string, string, number, ...number[]] & {length: 8};
 export class SummaryData {
 
     private data: JSON;
@@ -62,6 +62,9 @@ export class SummaryData {
         return this.data["Countries"][i].Country;
     }
 
+    private getCountrySlug(i: number): string {
+        return this.data["Countries"][i].Slug;
+    }
     private getCountryNewCases(i: number): number {
         return this.data["Countries"][i].NewConfirmed;
     }
@@ -92,6 +95,7 @@ export class SummaryData {
         for (let i = 0; i < n; i++){
             let line: Line = [
                 this.getCountryName(i),
+                this.getCountrySlug(i),
                 this.getCountryNewCases(i),
                 this.getCountryTotalCases(i),
                 this.getCountryNewRecoveries(i),
