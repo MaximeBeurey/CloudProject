@@ -34,7 +34,7 @@ export class SummaryByCountryComponent implements OnInit {
     this.countryData = this.countryData.sort((a:Line, b:Line) => {
       if (a[field] < b[field]) {
         return order * 1;
-      } else if (a[0] > b[0]) {
+      } else if (a[field] > b[field]) {
         return order * -1;
       } else {
         return 0;
@@ -44,7 +44,6 @@ export class SummaryByCountryComponent implements OnInit {
 
   public goToCountry(country: Line): void {
     this.countryService.navigate(country);
-    console.log("We are going to "+country[0]);
   }
 
 }
