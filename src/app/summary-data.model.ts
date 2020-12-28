@@ -108,4 +108,14 @@ export class SummaryData {
         return ret;
     } 
 
+    public getCountrySummaryData(slug: string): any {
+        let countryData = this.data["Countries"];
+        for (let i = 0; i<this.getNumberOfCountries(); i++) {
+            if (countryData[i].Slug === slug) {
+                return countryData[i];
+            }
+        }
+        return null;
+    }
+
 }

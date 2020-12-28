@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SummaryData } from './summary-data.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { CountrySummaryData } from './country-summary-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,13 @@ export class DataService {
   public async getSummaryData() {
     await this.updateSummaryData();
     return this.summaryData;
+  }
+
+  public async getCountrySummaryData(countrySlug: string): Promise<CountrySummaryData> {
+    if (this.summaryData == null) {
+      await this.updateSummaryData();
+    }
+    return new CountrySummaryData(this.summaryData.getCountrySummaryData(countrySlug));
   }
 
 }

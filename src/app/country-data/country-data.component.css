@@ -30,7 +30,8 @@ div.country {
     margin-right: auto;
     position: relative;
     font-weight: 600;
-    text-transform: capitalize;  
+    text-transform: capitalize;
+    margin-bottom: 20px;
 }
 
 div.country p {
@@ -41,9 +42,10 @@ div.country p {
     transform: translate(-50%, -50%);
 }
 
-div.country fa-icon {
+div.country span {
     color: white;
     margin: 10px;
+    font-weight: 900;
 }
 
 div.country p a {
@@ -53,4 +55,80 @@ div.country p a {
 div.country p a:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+table {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+
+th {
+    background-color: #eeeeee;
+    border: 4px solid white;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+td:nth-child(2) {
+    text-align: right;
+}
+
+tr.cases {
+    background-color: #fde29d;
+}
+
+tr.recovered {
+    background-color: #87c7f3;
+}
+
+tr.deaths {
+    background-color: #ed97ab;
+}
+
+td {
+    border: 4px solid white;
+    text-transform: capitalize;
+}
+
+div.date {
+    padding-left: 8px;
+    text-align: left;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-style: italic;
+    font-weight: 100;
+    color: #444444;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.pie-chart div.header {
+    max-width: 1200px;
+    min-height: 4em;
+    height: auto;
+    overflow-y: auto;
+    border: 4px solid white;
+    background-color: #eeeeee;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+div.pie-chart div.header p {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.pie-chart canvas {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }

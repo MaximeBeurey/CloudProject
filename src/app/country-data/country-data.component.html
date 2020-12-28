@@ -5,6 +5,73 @@
 </div>
 <div class="country">
     <p><a (click)="this.goToWorldwide()">Worldwide</a>
-    <fa-icon [icon]="faAngleRight"></fa-icon>
-    country</p> <!-- To replace with the real country name --> 
+    <span>></span> {{this.country}} </p> 
+</div>
+
+<!-- Summary table -->
+<div class="row mx-3 summary-table">
+    <table class="table table-bordered col-md-12">
+        <thead>
+            <th colspan="2">Corona virus summary in {{this.country}}</th>
+        </thead>
+        <tbody>
+            <tr class="cases">
+                <td>Total cases</td>
+                <td>{{this.countrySummaryData.getTotalCases() | number}}</td>
+            </tr>
+            <tr class="cases">
+                <td>New cases</td>
+                <td>{{this.countrySummaryData.getNewCases() | number}}</td>
+            </tr>
+            <tr class="cases">
+                <td>Active cases</td>
+                <td>{{this.countrySummaryData.getActiveCases() | number}}</td>
+            </tr>
+            <tr class="recovered">
+                <td>Total recovered</td>
+                <td>{{this.countrySummaryData.getTotalRecovered() | number}}</td>
+            </tr>
+            <tr class="recovered">
+                <td>New recovered</td>
+                <td>{{this.countrySummaryData.getNewRecovered() | number}}</td>
+            </tr>
+            <tr class="recovered">
+                <td>Recovery rate</td>
+                <td>{{this.countrySummaryData.getRecoveryRate()}}<span>&#37;</span></td>
+            </tr>
+            <tr class="deaths">
+                <td>Total deaths</td>
+                <td>{{this.countrySummaryData.getTotalDeaths() | number}}</td>
+            </tr>
+            <tr class="deaths">
+                <td>New death</td>
+                <td>{{this.countrySummaryData.getNewDeaths() | number}}</td>
+            </tr>
+            <tr class="deaths">
+                <td>Mortality rate</td>
+                <td>{{this.countrySummaryData.getMortalityRate()}}<span>&#37;</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="date">
+    <p>Last update: {{this.countrySummaryData.getDate() | date}}</p>
+</div>
+
+<!-- Pie chart -->
+<div class="m-3 pie-chart">
+    <div class="header">
+        <p>Corona virus cases distribution in {{this.country}}</p>
+    </div>
+    <canvas baseChart
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+    </canvas>
+</div>
+<div class="date">
+    <p>Last update: {{this.countrySummaryData.getDate() | date}}</p>
 </div>
