@@ -8,8 +8,14 @@
     <span>></span> {{this.country}} </p> 
 </div>
 
+<div class="no-country" *ngIf="this.countrySummaryData.data == null">
+    <p> Country not found </p>
+    <p> Go back to worldwide </p>
+    <p class="go-back" (click)="this.goToWorldwide()"> Worldwide </p>
+</div>
+
 <!-- Summary table -->
-<div class="row mx-3 summary-table">
+<div class="row mx-3 summary-table" *ngIf="this.countrySummaryData.data != null">
     <table class="table table-bordered col-md-12">
         <thead>
             <th colspan="2">Corona virus summary in {{this.country}}</th>
@@ -59,7 +65,7 @@
 </div>
 
 <!-- Pie chart -->
-<div class="m-3 pie-chart">
+<div class="m-3 pie-chart" *ngIf="this.countrySummaryData.data != null">
     <div class="header">
         <p>Corona virus cases distribution in {{this.country}}</p>
     </div>
@@ -75,3 +81,12 @@
 <div class="date">
     <p>Last update: {{this.countrySummaryData.getDate() | date}}</p>
 </div>
+
+<footer class="page-footer">
+    <p>
+        Data source: 
+        <a href="https://covid19api.com/" target="_blank" rel="noopener noreferrer">
+            COVID-19 API / Johns Hopkins CSSE
+        </a>
+    </p>
+</footer>

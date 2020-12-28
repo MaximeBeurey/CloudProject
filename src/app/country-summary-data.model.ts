@@ -1,6 +1,6 @@
 export class CountrySummaryData {
 
-    private data: JSON;
+    public data: JSON;
 
     public constructor(data: JSON) {
         this.data = data;

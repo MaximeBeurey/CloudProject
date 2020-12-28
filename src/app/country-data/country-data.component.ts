@@ -32,12 +32,17 @@ export class CountryDataComponent implements OnInit {
     this.dataProvider.getCountrySummaryData(this.getSlug())
     .then((data) => {
       this.countrySummaryData = data;
+      if (this.countrySummaryData.data != null) {
       this.country = this.countrySummaryData.getCountry()
       this.pieChartData = [
         this.countrySummaryData.getTotalDeaths(),
         this.countrySummaryData.getTotalRecovered(),
         this.countrySummaryData.getActiveCases()
-      ]});
+      ];
+      } else {
+        this.country = "Not found"
+      }
+    });
   }
 
   public goToWorldwide(): void {

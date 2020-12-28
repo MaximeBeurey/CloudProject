@@ -1,7 +1,7 @@
 export type Line = [string, string, number, ...number[]] & {length: 8};
 export class SummaryData {
 
-    private data: JSON;
+    public data: JSON;
 
     public constructor(data: JSON) {
         this.data = data;
