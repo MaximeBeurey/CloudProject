@@ -15,6 +15,9 @@ export class DataService {
   private dailyData: DailyData;
   private dailyDataURL: string = 'https://corona.lmao.ninja/v2/historical/all?lastdays=7'
 
+  private totalData: DailyData;
+  private totalDataURL: string = "https://corona.lmao.ninja/v2/historical/all"
+
   constructor(private firestore: AngularFirestore) { 
   }
 
@@ -68,7 +71,6 @@ export class DataService {
 
   private async isDailyDataUpToDate(): Promise<boolean> {
     let currentDate = new Date().setHours(0,0,0,0).valueOf();
-    console.log(await this.getDailyDataLastUpdate());
     return this.getDailyDataLastUpdate().then((date) => {return date.setHours(0,0,0,0).valueOf() === currentDate}) 
   }
 
@@ -93,6 +95,39 @@ export class DataService {
   public async getDailyData() {
     await this.updateDailyData();
     return this.dailyData;
+  }
+
+  private async getTotalDataLastUpdate(): Promise<Date> {
+    let docRef = this.firestore.collection("CovidData").doc("TotalData").ref
+    return docRef.get().then((doc) => {return doc.data()["Date"].toDate();});
+  }
+
+  private async isTotalDataUpToDate(): Promise<boolean> {
+    let currentDate = new Date().setHours(0,0,0,0).valueOf();
+    return this.getTotalDataLastUpdate().then((date) => {return date.setHours(0,0,0,0).valueOf() === currentDate}) 
+  }
+
+  private async updateTotalData() {
+    // We check if data in frestore is up to date
+    if (await this.isTotalDataUpToDate()) {
+      // retreive data from firestore
+      let content = await this.firestore.collection("CovidData").doc("TotalData").ref
+      .get().then((doc) => {return JSON.parse(JSON.stringify(doc.data()));});
+      this.totalData = new DailyData(content);
+    } else {
+      // Retreive data from the API
+      let data: JSON = await fetch(this.totalDataURL, {method: "GET", redirect: "follow"})
+      .then(response => response.json()).catch(error => console.log(error));
+      this.totalData = new DailyData(data);
+      // update firestore database
+      this.firestore.collection("CovidData").doc("TotalData").set(data, {merge: true});
+      this.firestore.collection("CovidData").doc("TotalData").update({Date: new Date()})
+    }
+  }
+
+  public async getTotalData() {
+    await this.updateTotalData();
+    return this.totalData;
   }
 
 }

@@ -92,6 +92,25 @@
 </div>
 
 
+<!-- Line chart -->
+<div class="m-3 chart" *ngIf="this.totalData.data != null">
+    <div class="header">
+        <p>Total corona virus cases worldwide</p>
+    </div>
+    <canvas baseChart
+    [datasets]="lineChartDatasets" 
+    [labels]="lineChartLabels" 
+    [chartType]="lineChartType"
+    [options]="lineChartOptions"
+    [plugins]="lineChartPlugins"
+    [legend]="lineChartLegend">
+    </canvas>
+</div>
+<div class="date">
+    <p>Last update: {{this.summaryData.getDate() | date}}</p>
+</div>
+
+
 <!-- summary by country -->
 <app-summary-by-country></app-summary-by-country>
 
