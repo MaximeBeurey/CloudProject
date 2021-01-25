@@ -55,7 +55,7 @@
 </div>
 
 <!-- Pie chart -->
-<div class="m-3 pie-chart" *ngIf="this.summaryData.data != null">
+<div class="m-3 chart" *ngIf="this.summaryData.data != null">
     <div class="header">
         <p>Corona virus cases distribution worldwide</p>
     </div>
@@ -71,6 +71,26 @@
 <div class="date">
     <p>Last update: {{this.summaryData.getDate() | date}}</p>
 </div>
+
+
+<!-- Bar chart -->
+<div class="m-3 chart" *ngIf="this.dailyData.data != null">
+    <div class="header">
+        <p>Daily corona virus cases worldwide</p>
+    </div>
+    <canvas baseChart
+    [datasets]="barChartDatasets" 
+    [labels]="barChartLabels" 
+    [chartType]="barChartType"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend">
+    </canvas>
+</div>
+<div class="date">
+    <p>Last update: {{this.summaryData.getDate() | date}}</p>
+</div>
+
 
 <!-- summary by country -->
 <app-summary-by-country></app-summary-by-country>

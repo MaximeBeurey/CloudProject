@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartType, ChartOptions } from 'chart.js';
-import { SingleDataSet, Label } from 'ng2-charts';
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
+import { SingleDataSet, Label, MultiDataSet } from 'ng2-charts';
 import { SummaryData } from '../summary-data.model';
 import { DataService } from '../data.service';
+import { DailyData } from '../daily-data.model';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class WorldwideDataComponent implements OnInit {
 
   // data
   public summaryData: SummaryData;
+  public dailyData: DailyData;
   
   // pie chart
   public pieChartOptions: ChartOptions = { responsive: true };
@@ -22,6 +24,15 @@ export class WorldwideDataComponent implements OnInit {
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
+
+  // bar chart 
+  public barChartOptions: ChartOptions = { responsive: true };
+  public barChartLabels: Label[];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartDatasets: ChartDataSets[];
 
   constructor(private dataProvider: DataService) { }
 
@@ -34,6 +45,12 @@ export class WorldwideDataComponent implements OnInit {
                                           this.summaryData.getActiveCases()];
                     }
          );
+    this.dataProvider.getDailyData()
+    .then((data) => {
+                      this.dailyData = data;
+                      this.barChartLabels = this.dailyData.getBarChartLabel();
+                      this.barChartDatasets = this.dailyData.getBarChartData();
+    })
   }
 
 }

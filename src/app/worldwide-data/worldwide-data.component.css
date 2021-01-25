@@ -66,7 +66,7 @@ div.date {
     margin-right: auto;
 }
 
-div.pie-chart div.header {
+div.chart div.header {
     max-width: 1200px;
     min-height: 4em;
     height: auto;
@@ -80,7 +80,7 @@ div.pie-chart div.header {
     text-transform: capitalize;
 }
 
-div.pie-chart div.header p {
+div.chart div.header p {
     position: absolute;
     text-align: center;
     top: 50%;
@@ -88,7 +88,7 @@ div.pie-chart div.header p {
     transform: translate(-50%, -50%);
 }
 
-div.pie-chart canvas {
+div.chart canvas {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
