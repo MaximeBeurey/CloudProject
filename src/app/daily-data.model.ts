@@ -1,9 +1,9 @@
-import { SingleDataSet, Label } from 'ng2-charts';
+import { Label } from 'ng2-charts';
 import { ChartDataSets } from 'chart.js';
 
 export class DailyData {
 
-    private data: JSON;
+    public data: JSON;
 
     public constructor(data: JSON){
         this.data = data;
@@ -90,6 +90,17 @@ export class DailyData {
         dates.sort((a, b) => {return a < b ? -1 : 1;});
         let ret = dates.map(s => s.toDateString().substring(4));
         return ret;
+    }
+
+    public getDate(): Date {
+        // returns the last date of the data
+        let values = Object.keys(this.data["cases"]);
+        let splited = values.map(s => s.split("/"));
+        splited = splited.map(s => ["20"+s[2], s[0], s[1]]);
+        let joined = splited.map(s => s.join("-"));
+        let dates = joined.map(date => new Date(date));
+        dates.sort((a, b) => {return a < b ? 1 : -1;});
+        return dates[0];
     }
 
 }
