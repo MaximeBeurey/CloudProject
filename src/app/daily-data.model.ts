@@ -75,9 +75,9 @@ export class DailyData {
 
     public getChartData(): ChartDataSets[] {
         return [
-            {data : this.getWeekDeaths(), label: "Daily Deaths"},
-            {data : this.getWeekRecoveries(), label: "Daily Recovered"},
-            {data : this.getWeekNewCases(), label: "Daily New Cases"},
+            {data: this.getWeekDeaths(), label: "Daily Deaths"},
+            {data: this.getWeekRecoveries(), label: "Daily Recovered"},
+            {data: this.getWeekNewCases(), label: "Daily New Cases"},
           ];
     }
 

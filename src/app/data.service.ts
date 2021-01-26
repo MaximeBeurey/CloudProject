@@ -3,6 +3,8 @@ import { SummaryData } from './summary-data.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CountrySummaryData } from './country-summary-data.model';
 import { DailyData } from './daily-data.model';
+import { CountryDailyData } from './country-daily-data.model';
+import { ThemeService } from 'ng2-charts';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,9 @@ export class DataService {
 
   private totalData: DailyData;
   private totalDataURL: string = "https://corona.lmao.ninja/v2/historical/all"
+
+  private countryDailyData: CountryDailyData;
+  private countryDailyDataURL: string = "https://api.covid19api.com/dayone/country/" //and add the slug
 
   constructor(private firestore: AngularFirestore) { 
   }
@@ -129,5 +134,44 @@ export class DataService {
     await this.updateTotalData();
     return this.totalData;
   }
+
+  private async getCountryDailyDataLastUpdate(slug: string): Promise<Date> {
+    let docRef = this.firestore.collection("CountryData").doc(slug).ref
+    return docRef.get().then((doc) => {return doc.data()["Date"].toDate();})
+    .catch((error) => {
+      // document does not exist
+      this.firestore.collection("CountryData").doc(slug).set({Date: new Date("2000-01-1")}); // this way it's not up to date
+    });
+  }
+
+  private async isCountryDailyDataUpToDate(slug: string): Promise<boolean> {
+    let currentDate = new Date().setHours(0,0,0,0).valueOf();
+    return this.getCountryDailyDataLastUpdate(slug).then((date) => {
+      console.log(date); return date.setHours(0,0,0,0).valueOf() === currentDate}) 
+  }
+
+  private async updateCountryDailyData(slug: string) {
+    if (await this.isCountryDailyDataUpToDate(slug)) {
+      // retreive data from firestore
+      let content = await this.firestore.collection("CountryData").doc(slug).ref
+      .get().then((doc) => {return JSON.parse(JSON.stringify(doc.data()["data"]));});
+      this.countryDailyData = new CountryDailyData(content);
+    } else {
+      // retrive data from the API
+      let url = this.countryDailyDataURL + slug
+      let data: JSON = await fetch(url, {method: "GET", redirect: "follow"})
+      .then(response => response.json()).catch(error => console.log(error));
+      this.countryDailyData = new CountryDailyData(data);
+      // update firestore database
+      this.firestore.collection("CountryData").doc(slug).set({data: this.countryDailyData.data}, {merge: true}); // we don't store data relative to provinces
+      this.firestore.collection("CountryData").doc(slug).update({Date: new Date()});
+    }
+  }
+
+  public async getCountryDailyData(slug: string){
+    await this.updateCountryDailyData(slug);
+    return this.countryDailyData;
+  }
+
 
 }
