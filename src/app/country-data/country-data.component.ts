@@ -63,7 +63,6 @@ export class CountryDataComponent implements OnInit {
     this.dataProvider.getCountryDailyData(this.getSlug())
     .then((data) => {
       this.countryDailyData = data;
-      console.log(this.countryDailyData);
       this.barChartLabels = this.countryDailyData.getWeekChartLabels();
       this.barChartDatasets = this.countryDailyData.getWeekChartData();
       this.lineChartLabels = this.countryDailyData.getLineChartLabels();

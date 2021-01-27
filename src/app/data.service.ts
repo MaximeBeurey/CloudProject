@@ -140,14 +140,14 @@ export class DataService {
     return docRef.get().then((doc) => {return doc.data()["Date"].toDate();})
     .catch((error) => {
       // document does not exist
-      this.firestore.collection("CountryData").doc(slug).set({Date: new Date("2000-01-1")}); // this way it's not up to date
+      this.firestore.collection("CountryData").doc(slug).set({Date: new Date("2000-01-1")});  // this way it's not up to date
+      return this.getCountryDailyDataLastUpdate(slug); // return the right value (now the doc exists and is not up to date)
     });
   }
 
   private async isCountryDailyDataUpToDate(slug: string): Promise<boolean> {
     let currentDate = new Date().setHours(0,0,0,0).valueOf();
-    return this.getCountryDailyDataLastUpdate(slug).then((date) => {
-      console.log(date); return date.setHours(0,0,0,0).valueOf() === currentDate}) 
+    return this.getCountryDailyDataLastUpdate(slug).then((date) => { return date.setHours(0,0,0,0).valueOf() === currentDate }) 
   }
 
   private async updateCountryDailyData(slug: string) {
