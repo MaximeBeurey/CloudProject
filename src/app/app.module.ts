@@ -15,13 +15,16 @@ import { WorldwideDataComponent } from './worldwide-data/worldwide-data.componen
 import { SummaryByCountryComponent } from './summary-by-country/summary-by-country.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CountryDataComponent } from './country-data/country-data.component';
+import { NewsComponent } from './news/news.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorldwideDataComponent,
     SummaryByCountryComponent,
-    CountryDataComponent
+    CountryDataComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { CountryDataComponent } from './country-data/country-data.component';
     AppRoutingModule,
     ChartsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

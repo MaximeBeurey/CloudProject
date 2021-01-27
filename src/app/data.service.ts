@@ -3,8 +3,11 @@ import { SummaryData } from './summary-data.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CountrySummaryData } from './country-summary-data.model';
 import { DailyData } from './daily-data.model';
+import firebase from 'firebase/app';
 import { CountryDailyData } from './country-daily-data.model';
-import { ThemeService } from 'ng2-charts';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from './user.model';
+import { News } from './news.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +26,10 @@ export class DataService {
   private countryDailyData: CountryDailyData;
   private countryDailyDataURL: string = "https://api.covid19api.com/dayone/country/" //and add the slug
 
-  constructor(private firestore: AngularFirestore) { 
+  private user: User;
+  private canEdit: boolean;
+
+  constructor(private firestore: AngularFirestore, private afAuth : AngularFireAuth) { 
   }
 
   private toDate(date: string): Date {
@@ -173,5 +179,60 @@ export class DataService {
     return this.countryDailyData;
   }
 
+  public async signInWithGoogle(){
+    const credentials = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.user = {
+      uid: credentials.user.uid,
+      displayName: credentials.user.displayName,
+      email: credentials.user.email
+    };
+    localStorage.setItem("user", JSON.stringify(this.user));
+    this.updateUserData();
+   }
+
+  private updateUserData(): void{
+    this.firestore.collection("users").doc(this.user.uid).set({
+    uid: this.user.uid,
+    displayName: this.user.displayName,
+    email: this.user.email
+    },{merge: true});
+  }
+
+  public getUser(): User{
+    if (this.user == null && this.isUserSignedIn()){
+      this.user = JSON.parse(localStorage.getItem("user"));
+    }
+    return this.user;
+  }
+
+  public isUserSignedIn(): boolean{
+    return JSON.parse(localStorage.getItem("user")) != null;
+  }
+
+  public signOut(): void{
+    this.afAuth.signOut();
+    localStorage.removeItem("user");
+    this.user = null;
+  }
+
+  public async addNews(news: News){
+    this.firestore.collection("news").add({ 
+      userName: news.userName,
+      date: news.date,
+      description: news.description,
+      country: news.countrySlug
+    });
+  }
+
+  public async getNews(){
+    const snapshot = await firebase.firestore().collection('news').get()
+    return snapshot.docs.map(doc => new News(
+        doc.data()["userName"], 
+        new Date(doc.data()["date"].toDate()), 
+        doc.data()["description"],
+        doc.data()["country"]
+        )
+      );    
+  }
 
 }

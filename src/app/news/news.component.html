@@ -1,0 +1,88 @@
+<div class="m-3 chart">
+    <div class="header">
+        <p> News </p>
+    </div>
+    <div class="content">
+        <!-- Here are the news -->
+        <div class="news-body" *ngFor="let new of news">
+            <div class="news-head">
+                <div class="country">
+                    <p>{{getCountryName(new.countrySlug)}}</p>
+                </div>
+                <div class="author">
+                    <p>{{new.userName}}</p>
+                </div>
+            </div>
+            <div class="news-info">
+                <p>{{new.description}}</p>
+            </div>
+            <div class="date">
+                <p>{{new.date | date}}</p>
+            </div>
+        </div>        
+        <!--
+        <div class="news-body">
+            <div class="news-head">
+                <div class="country">
+                    <p>France</p>
+                </div>
+                <div class="author">
+                    <p> Maxime </p>
+                </div>
+            </div>
+            <div class="news-info">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ducimus quidem ullam dolor eaque eveniet accusantium a minima reprehenderit nam voluptas animi cum quia aperiam, sit magnam odio inventore enim?</p>
+            </div>
+            <div class="date">
+                <p>Jan 10, 2021</p>
+            </div>
+        </div>
+        <div class="news-body">
+            <div class="news-head">
+                <div class="country">
+                    <p>Espagne</p>
+                </div>
+                <div class="author">
+                    <p>George</p>
+                </div>
+            </div>
+            <div class="news-info">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ducimus quidem ullam dolor eaque eveniet accusantium a minima reprehenderit nam voluptas animi cum quia aperiam, sit magnam odio inventore enim?</p>
+            </div>
+            <div class="date">
+                <p>Jan 10, 2021</p>
+            </div>
+        </div>
+    </div> -->
+    <!-- Sign in button -->
+    <div class="sign-in text-center" *ngIf="dataProvider.isUserSignedIn() == false">
+        <button class="btn btn-info" (click)="dataProvider.signInWithGoogle()"> Sign In</button>
+    </div>
+    <!-- Write news -->
+    <form #myForm="ngForm" (ngSubmit)="addNews(); myForm.reset();" *ngIf="dataProvider.isUserSignedIn()">
+        <div class="country-picker">
+            <div class="row">
+                <div class="col-12">
+                    <label for="descriptionInput">Description</label>
+                    <textarea class="form-control" placeholder="Description" name="descriptionInput" id="descriptionInput" [(ngModel)]="description" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11">
+                    <label for="countrySelector">Country</label>
+                    <select class="form-control" name="countrySelector" id="countrySelector" [(ngModel)]="country" required>
+                        <option value="" hidden>--- Select ---</option>
+                        <option *ngFor="let country of countries" [value]="country.slug"> {{country.name}} </option>
+                    </select>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Sign Out -->
+    <div class="sign-out text-center" *ngIf="dataProvider.isUserSignedIn()">
+        <button class="btn btn-danger sign-out" (click)="dataProvider.signOut()">Sign Out</button>
+    </div>
+</div>

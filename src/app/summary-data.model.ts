@@ -1,3 +1,5 @@
+import { Country } from './country.model';
+
 export type Line = [string, string, number, ...number[]] & {length: 8};
 export class SummaryData {
 
@@ -116,6 +118,26 @@ export class SummaryData {
             }
         }
         return null;
+    }
+
+    public getAllCountriesNames(): Country[] {
+        let ret = [];
+        let worldwide = new Country("worldwide", "Worldwide");
+        ret.push(worldwide);
+        let countries = [];
+        for (let i = 0; i < this.getNumberOfCountries(); i++) {
+            let temp = new Country(this.getCountrySlug(i), this.getCountryName(i));
+            countries.push(temp);
+        }
+        countries.sort((a, b) => {
+            if (a < b) {
+                 return 1;
+            } else {
+                return -1;
+            }
+        });
+        ret = ret.concat(countries);
+        return ret;
     }
 
 }
